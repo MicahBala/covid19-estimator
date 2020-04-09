@@ -3,7 +3,7 @@ const inputData = {
   region: {
     name: 'Africa',
     avgAge: 19.7,
-    angDailyIncomeInUSD: 5,
+    avgDailyIncomeInUSD: 5,
     avgDailyIncomePopulation: 0.71
   },
   periodType: 'days',
@@ -13,28 +13,46 @@ const inputData = {
   totalHospitalBeds: 1380614
 };
 
+const { reportedCases, timeToElapse, periodType } = inputData;
+
 // Get factor
-const getFactor = (num1, num2) => {
-  const factor = num1 / num2;
-  return factor;
+const getFactor = () => {
+  let estimate;
+  if (periodType === 'months') {
+    estimate = timeToElapse * 30;
+  } else if (periodType === 'weeks') {
+    estimate = timeToElapse * 7;
+  } else {
+    estimate = timeToElapse;
+  }
+
+  const factor = estimate / 3;
+
+  return (2 ** factor);
 };
 
 // Covid-19 Estimator
 const covid19ImpactEstimator = () => {
-  const factor = Math.floor(getFactor(inputData.timeToElapse, 3));
-  const result = 2 ** factor;
+  const data = inputData;
+  const result = getFactor();
 
-  return {
-    data: inputData,
-    impact: {
-      currentlyInfected: inputData.reportedCases * 10,
-      infectionByRequestedTime: impact.currentlyInfected * result
-    },
-    severeImpact: {
-      currentlyInfected: inputData.reportedCases * 50,
-      infectionByRequestedTime: severeImpact.currentlyInfected * result
-    }
+  const impact = {
+    currentlyInfected: 0,
+    infectionsByRequestedTime: 0
   };
+
+  const severeImpact = {
+    currentlyInfected: 0,
+    infectionsByRequestedTime: 0
+  };
+
+  impact.currentlyInfected = reportedCases * 10;
+  impact.infectionsByRequestedTime = impact.currentlyInfected * result;
+
+  severeImpact.currentlyInfected = reportedCases * 50;
+  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * result;
+
+  return { data, impact, severeImpact };
 };
 
 export default covid19ImpactEstimator;

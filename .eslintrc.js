@@ -18,6 +18,7 @@ module.exports = {
   },
   rules: {
     "comma-dangle": ["error", "never"],
+    "linebreak-style":["error","windows"],
     "no-param-reassign": ["error", { "props": false }]
   },
 };
