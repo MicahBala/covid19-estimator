@@ -23,16 +23,17 @@ const getFactor = (num1, num2) => {
 const covid19ImpactEstimator = () => {
   const factor = Math.floor(getFactor(inputData.timeToElapse, 3));
   const result = 2 ** factor;
+  const estimate = estimateInWeeksMonths(inputData.periodType);
 
   return {
     data: inputData,
     impact: {
       currentlyInfected: inputData.reportedCases * 10,
-      infectionByRequestedTime: inputData.currentlyInfected * result
+      infectionByRequestedTime: impact.currentlyInfected * result
     },
     severeImpact: {
       currentlyInfected: inputData.reportedCases * 50,
-      infectionByRequestedTime: inputData.currentlyInfected * result
+      infectionByRequestedTime: severeImpact.currentlyInfected * result
     }
   };
 };
