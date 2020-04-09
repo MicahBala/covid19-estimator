@@ -19,25 +19,10 @@ const getFactor = (num1, num2) => {
   return factor;
 };
 
-// Estimate in weeks and months
-const estimateInWeeksMonths = (duration) => {
-  let estimate;
-  if(duration == 'weeks') {
-    estimate = inputData.timeToElapse / 7;
-  } else if (inputData.periodType == 'months') {
-    estimate = inputData.timeToElapse / 30;
-  } else {
-    estimate = inputData.timeToElapse;
-  }
-  factor = Math.floor(getFactor(estimate, 3));
-  const result = 2 ** factor;
-}
-
 // Covid-19 Estimator
 const covid19ImpactEstimator = () => {
-  // const factor = Math.floor(getFactor(inputData.timeToElapse, 3));
-  // const result = 2 ** factor;
-  const estimate = estimateInWeeksMonths(inputData.periodType);
+  const factor = Math.floor(getFactor(inputData.timeToElapse, 3));
+  const result = 2 ** factor;
 
   return {
     data: inputData,
