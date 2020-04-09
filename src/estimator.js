@@ -16,26 +16,38 @@ const inputData = {
 const { reportedCases, timeToElapse, periodType } = inputData;
 
 // Get factor
-const getFactor = (duration) => {
-  let estimate;
-  if (periodType === 'months') {
-    estimate = duration * 30;
-  } else if (periodType === 'weeks') {
-    estimate = duration * 7;
-  } else {
-    estimate = duration;
-  }
+// const getFactor = () => {
+//   let estimate;
+//   if (periodType === 'months') {
+//     estimate = timeToElapse * 30;
+//   } else if (periodType === 'weeks') {
+//     estimate = timeToElapse * 7;
+//   } else {
+//     estimate = timeToElapse;
+//   }
 
-  const factor = estimate / 3;
-  const result = 2 ** factor;
+//   const factor = estimate / 3;
+//   const result = 2 ** factor;
 
-  return result;
-};
+//   return result;
+// };
 
 // Covid-19 Estimator
 const covid19ImpactEstimator = () => {
   const data = inputData;
-  const result = getFactor(timeToElapse);
+
+  // Get factor
+  let estimate;
+  if (periodType === 'months') {
+    estimate = timeToElapse * 30;
+  } else if (periodType === 'weeks') {
+    estimate = timeToElapse * 7;
+  } else {
+    estimate = timeToElapse;
+  }
+
+  const factor = estimate / 3;
+  const result = 2 ** factor;
 
   const impact = {};
 
