@@ -1,31 +1,38 @@
-const inputData = {
+// Input Data
+let inputData = {
   region: {
     name: 'Africa',
-    avgAge: 19.7,
-    angDailyIncomeInUSD: 5,
-    avgDailyIncomePopulation: 0.71
+    avgAge: '19.7',
+    angDailyIncomeInUSD: '5',
+    avgDailyIncomePopulation: '0.71'
   },
   priodType: 'days',
-  timeToElapse: 58,
-  reportedCases: 674,
-  population: 66622705,
-  totalHospitalBeds: 1380614
+  timeToElapse: '58',
+  reportedCases: '674',
+  population: '66622705',
+  totalHospitalBeds: '1380614'
 };
 
-const covid19ImpactEstimator = data => {
-  data = inputData;
-  const factor = Math.floor(data.timeToElapse / 3);
+// Get factor
+const getFactor = (num1, num2) => {
+  const factor = num1 / num2;
+  return factor;
+};
+
+// Covid-19 Estimator
+const covid19ImpactEstimator = () => {
+  const factor = Math.floor(getFactor(inputData.timeToElapse, 3));
   const result = 2 ** factor;
 
   return {
     data: inputData,
     impact: {
-      currentlyInfected: data.reportedCases * 10,
-      infectionsByRequestedTime: data.currentlyInfected * result
+      currentlyInfected: inputData.reportedCases * 10,
+      infectionByRequestedTime: inputData.currentlyInfected * result
     },
     severeImpact: {
-      currentlyInfected: data.reportedCases * 50,
-      infectionsByRequestedTime: data.currentlyInfected * result
+      currentlyInfected: inputData.reportedCases * 50,
+      infectionByRequestedTime: inputData.currentlyInfected * result
     }
   };
 };
