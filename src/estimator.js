@@ -2,15 +2,15 @@
 const inputData = {
   region: {
     name: 'Africa',
-    avgAge: '19.7',
-    angDailyIncomeInUSD: '5',
-    avgDailyIncomePopulation: '0.71'
+    avgAge: 19.7,
+    angDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
   },
   priodType: 'days',
-  timeToElapse: '58',
-  reportedCases: '674',
-  population: '66622705',
-  totalHospitalBeds: '1380614'
+  timeToElapse: 58,
+  reportedCases: 674,
+  population: 66622705,
+  totalHospitalBeds: 1380614
 };
 
 // Get factor
