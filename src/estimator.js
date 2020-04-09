@@ -46,7 +46,7 @@ const covid19ImpactEstimator = () => {
     estimate = timeToElapse;
   }
 
-  const factor = estimate / 3;
+  const factor = Math.floor(estimate / 3);
   const result = 2 ** factor;
 
   const impact = {};
