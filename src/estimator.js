@@ -13,28 +13,10 @@ const inputData = {
   totalHospitalBeds: 1380614
 };
 
-const { reportedCases, timeToElapse, periodType } = inputData;
-
-// Get factor
-// const getFactor = () => {
-//   let estimate;
-//   if (periodType === 'months') {
-//     estimate = timeToElapse * 30;
-//   } else if (periodType === 'weeks') {
-//     estimate = timeToElapse * 7;
-//   } else {
-//     estimate = timeToElapse;
-//   }
-
-//   const factor = estimate / 3;
-//   const result = 2 ** factor;
-
-//   return result;
-// };
-
 // Covid-19 Estimator
-const covid19ImpactEstimator = () => {
+const covid19ImpactEstimator = (inputData) => {
   const data = inputData;
+  const { reportedCases, timeToElapse, periodType } = inputData;
 
   // Get factor
   let estimate;
