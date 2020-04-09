@@ -14,7 +14,7 @@ const inputData = {
 
 // Calculate factor
 const calculateFactor = () => {
-  return Math.floor(inputData.timeToElapse / 3);
+  Math.floor(inputData.timeToElapse / 3);
 };
 
 const result = 2 ** calculateFactor();
