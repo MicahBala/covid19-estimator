@@ -1,5 +1,5 @@
 // Input Data
-let inputData = {
+const inputData = {
   region: {
     name: 'Africa',
     avgAge: '19.7',
