@@ -19,7 +19,7 @@ const calculateFactor = () => {
 
 const result = 2 ** calculateFactor();
 
-const covid19ImpactEstimator = () => {
+const covid19ImpactEstimator = inputData => {
   return {
     data: inputData,
     impact: {
