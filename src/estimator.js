@@ -14,7 +14,7 @@ const inputData = {
 };
 
 // Covid-19 Estimator
-const covid19ImpactEstimator = (inputData) => {
+const covid19ImpactEstimator = () => {
   const data = inputData;
 
   const { reportedCases, timeToElapse, periodType } = data;
