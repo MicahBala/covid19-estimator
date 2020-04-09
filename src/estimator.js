@@ -13,12 +13,13 @@ const inputData = {
 };
 
 // Calculate factor
-calculateFactor = () => {
+const calculateFactor = () => {
   return Math.floor(inputData.timeToElapse / 3);
 };
 
-const covid19ImpactEstimator = inputData => {
-  const result = Math.pow(2, calculateFactor());
+const result = 2 ** calculateFactor();
+
+const covid19ImpactEstimator = () => {
   return {
     data: inputData,
     impact: {
