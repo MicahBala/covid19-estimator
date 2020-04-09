@@ -1,4 +1,4 @@
-const inputData = {
+const data = {
   region: {
     name: 'Africa',
     avgAge: 19.7,
@@ -12,25 +12,21 @@ const inputData = {
   totalHospitalBeds: 1380614
 };
 
-// Calculate factor
-const calculateFactor = () => {
-  Math.floor(inputData.timeToElapse / 3);
-};
+const covid19ImpactEstimator = data => {
+  const factor = Math.floor(data.timeToElapse / 3);
+  const result = 2 ** factor;
 
-const result = 2 ** calculateFactor();
-
-const covid19ImpactEstimator = () => {
-  ({
-    data: inputData,
+  return {
+    data: data,
     impact: {
-      currentlyInfected: inputData.reportedCases * 10,
-      infectionsByRequestedTime: inputData.currentlyInfected * result
+      currentlyInfected: data.reportedCases * 10,
+      infectionsByRequestedTime: data.currentlyInfected * result
     },
     severeImpact: {
       currentlyInfected: inputData.reportedCases * 50,
       infectionsByRequestedTime: inputData.currentlyInfected * result
     }
-  });
+  };
 };
 
 export default covid19ImpactEstimator;
