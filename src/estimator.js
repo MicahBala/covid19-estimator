@@ -14,10 +14,10 @@ const inputData = {
 };
 
 // Covid-19 Estimator
-const covid19ImpactEstimator = () => {
-  const data = inputData;
+const covid19ImpactEstimator = (data) => {
+  const input = data;
 
-  const { reportedCases, timeToElapse, periodType } = data;
+  const { reportedCases, timeToElapse, periodType } = input;
 
   // Get factor
   let estimate;
@@ -45,5 +45,7 @@ const covid19ImpactEstimator = () => {
 
   return { data, impact, severeImpact };
 };
+
+covid19ImpactEstimator(inputData);
 
 export default covid19ImpactEstimator;
