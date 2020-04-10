@@ -75,8 +75,8 @@ const covid19ImpactEstimator = (data) => {
 
   impact.severeCasesByRequestedTime = severeCases;
   impact.hospitalBedsByRequestedTime = hospitalBeds;
-  impact.casesForICUByRequestedTime = Math.trunc(casesForICU);
-  impact.casesForVentilatorsByRequestedTime = Math.trunc(casesForVentilators);
+  impact.casesForICUByRequestedTime = casesForICU;
+  impact.casesForVentilatorsByRequestedTime = casesForVentilators;
   impact.dollarsInFlight = Math.trunc(moneyLoss);
 
   severeImpact.currentlyInfected = getCases(reportedCases, 50);
@@ -96,8 +96,8 @@ const covid19ImpactEstimator = (data) => {
 
   severeImpact.severeCasesByRequestedTime = severeImpactCases;
   severeImpact.hospitalBedsByRequestedTime = severeImpactHospitalBeds;
-  severeImpact.casesForICUByRequestedTime = Math.trunc(severeCasesForICU);
-  severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(severeCasesForVentilators);
+  severeImpact.casesForICUByRequestedTime = severeCasesForICU;
+  severeImpact.casesForVentilatorsByRequestedTime = severeCasesForVentilators;
   severeImpact.dollarsInFlight = Math.trunc(severeMoneyLoss);
 
   return { data, impact, severeImpact };
