@@ -64,10 +64,10 @@ const covid19ImpactEstimator = (data) => {
   let severeCases = getCases(impact.infectionsByRequestedTime, 0.15);
   severeCases = Math.trunc(severeCases);
 
-  let casesForICU = getCases(impact.infectionsByRequestedTime, 0.05);
+  let casesForICU = getCases(impact.infectionsByRequestedTime, 0.5);
   casesForICU = Math.trunc(casesForICU);
 
-  let casesForVentilators = getCases(impact.infectionsByRequestedTime, 0.02);
+  let casesForVentilators = getCases(impact.infectionsByRequestedTime, 0.2);
   casesForVentilators = Math.trunc(casesForVentilators);
 
   const populationIncome = Math.trunc(avgDailyIncomePopulation * avgDailyIncomeInUSD);
@@ -80,7 +80,7 @@ const covid19ImpactEstimator = (data) => {
   impact.hospitalBedsByRequestedTime = hospitalBeds;
   impact.casesForICUByRequestedTime = casesForICU;
   impact.casesForVentilatorsByRequestedTime = casesForVentilators;
-  impact.dollarsInFlight = moneyLoss;
+  impact.dollarsInFlight = Math.trunc(moneyLoss);
 
   severeImpact.currentlyInfected = getCases(reportedCases, 50);
   severeImpact.infectionsByRequestedTime = getCases(severeImpact.currentlyInfected, result);
@@ -88,10 +88,10 @@ const covid19ImpactEstimator = (data) => {
   let severeImpactCases = getCases(severeImpact.infectionsByRequestedTime, 0.15);
   severeImpactCases = Math.trunc(severeImpactCases);
 
-  let severeCasesForICU = getCases(severeImpact.infectionsByRequestedTime, 0.05);
+  let severeCasesForICU = getCases(severeImpact.infectionsByRequestedTime, 0.5);
   severeCasesForICU = Math.trunc(severeCasesForICU);
 
-  let severeCasesForVentilators = getCases(severeImpact.infectionsByRequestedTime, 0.02);
+  let severeCasesForVentilators = getCases(severeImpact.infectionsByRequestedTime, 0.2);
   severeCasesForVentilators = Math.trunc(severeCasesForVentilators);
 
   const severePopIncome = Math.trunc(avgDailyIncomePopulation * avgDailyIncomeInUSD);
@@ -104,7 +104,7 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.hospitalBedsByRequestedTime = severeImpactHospitalBeds;
   severeImpact.casesForICUByRequestedTime = severeCasesForICU;
   severeImpact.casesForVentilatorsByRequestedTime = severeCasesForVentilators;
-  severeImpact.dollarsInFlight = severeMoneyLoss;
+  severeImpact.dollarsInFlight = Math.trunc(severeMoneyLoss);
 
   return { data, impact, severeImpact };
 };
