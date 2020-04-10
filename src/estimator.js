@@ -35,7 +35,7 @@ const covid19ImpactEstimator = (data) => {
   const impact = {};
   const severeImpact = {};
 
-  const getCases = (cases, estimateNum) => cases * estimateNum;
+  const getCases = Math.floor((cases, estimateNum) => cases * estimateNum);
 
   impact.currentlyInfected = getCases(reportedCases, 10);
   impact.infectionsByRequestedTime = getCases(impact.currentlyInfected, result);
