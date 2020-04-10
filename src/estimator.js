@@ -64,8 +64,10 @@ const covid19ImpactEstimator = (data) => {
   let severeCases = getCases(impact.infectionsByRequestedTime, 0.15);
   severeCases = Math.trunc(severeCases);
 
-  const casesForICU = getCases(impact.infectionsByRequestedTime, 0.05);
-  const casesForVentilators = getCases(impact.infectionsByRequestedTime, 0.02);
+  let casesForICU = getCases(impact.infectionsByRequestedTime, 0.05);
+  casesForICU = Math.trunc(casesForICU);
+  let casesForVentilators = getCases(impact.infectionsByRequestedTime, 0.02);
+  casesForVentilators = Math.trunc(casesForVentilators);
 
   const populationIncome = Math.trunc(avgDailyIncomePopulation * avgDailyIncomeInUSD);
   const moneyLoss = (impact.infectionsByRequestedTime * populationIncome) / estimate;
@@ -75,8 +77,8 @@ const covid19ImpactEstimator = (data) => {
 
   impact.severeCasesByRequestedTime = severeCases;
   impact.hospitalBedsByRequestedTime = hospitalBeds;
-  impact.casesForICUByRequestedTime = casesForICU;
-  impact.casesForVentilatorsByRequestedTime = casesForVentilators;
+  impact.casesForICUByRequestedTime = parseInt(casesForICU, 10);
+  impact.casesForVentilatorsByRequestedTime = parseInt(casesForVentilators, 10);
   impact.dollarsInFlight = Math.trunc(moneyLoss);
 
   severeImpact.currentlyInfected = getCases(reportedCases, 50);
@@ -85,8 +87,10 @@ const covid19ImpactEstimator = (data) => {
   let severeImpactCases = getCases(severeImpact.infectionsByRequestedTime, 0.15);
   severeImpactCases = Math.trunc(severeImpactCases);
 
-  const severeCasesForICU = getCases(severeImpact.infectionsByRequestedTime, 0.05);
-  const severeCasesForVentilators = getCases(severeImpact.infectionsByRequestedTime, 0.02);
+  let severeCasesForICU = getCases(severeImpact.infectionsByRequestedTime, 0.05);
+  severeCasesForICU = Math.trunc(severeCasesForICU);
+  let severeCasesForVentilators = getCases(severeImpact.infectionsByRequestedTime, 0.02);
+  severeCasesForVentilators = Math.trunc(severeCasesForVentilators);
 
   const severePopIncome = Math.trunc(avgDailyIncomePopulation * avgDailyIncomeInUSD);
   const severeMoneyLoss = (severeImpact.infectionsByRequestedTime * severePopIncome) / estimate;
@@ -96,8 +100,8 @@ const covid19ImpactEstimator = (data) => {
 
   severeImpact.severeCasesByRequestedTime = severeImpactCases;
   severeImpact.hospitalBedsByRequestedTime = severeImpactHospitalBeds;
-  severeImpact.casesForICUByRequestedTime = severeCasesForICU;
-  severeImpact.casesForVentilatorsByRequestedTime = severeCasesForVentilators;
+  severeImpact.casesForICUByRequestedTime = parseInt(severeCasesForICU, 10);
+  severeImpact.casesForVentilatorsByRequestedTime = parseInt(severeCasesForVentilators, 10);
   severeImpact.dollarsInFlight = Math.trunc(severeMoneyLoss);
 
   return { data, impact, severeImpact };
