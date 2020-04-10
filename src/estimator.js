@@ -44,7 +44,7 @@ const covid19ImpactEstimator = (data) => {
   let hospitalBeds = getCases(totalHospitalBeds, 0.35);
   hospitalBeds = Math.trunc(hospitalBeds) - severCases;
 
-  impact.severeCasesByRequestedTime = Math.floor(severCases);
+  impact.severeCasesByRequestedTime = Math.trunc(severCases);
   impact.hospitalBedsByRequestedTime = hospitalBeds;
 
   severeImpact.currentlyInfected = getCases(reportedCases, 50);
