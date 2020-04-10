@@ -15,9 +15,9 @@ const inputData = {
 
 // Covid-19 Estimator
 const covid19ImpactEstimator = (data) => {
-  const input = data;
-
-  const { reportedCases, timeToElapse, periodType } = input;
+  const {
+    reportedCases, timeToElapse, periodType, totalHospitalBeds
+  } = data;
 
   // Get factor
   let estimate;
@@ -39,9 +39,13 @@ const covid19ImpactEstimator = (data) => {
 
   impact.currentlyInfected = getCases(reportedCases, 10);
   impact.infectionsByRequestedTime = getCases(impact.currentlyInfected, result);
+  impact.severeCasesByRequestedTime = getCases(impact.infectionsByRequestedTime, 0.15);
+  impact.hospitalBedsByRequestedTime = getCases(totalHospitalBeds, 0.35);
 
   severeImpact.currentlyInfected = getCases(reportedCases, 50);
   severeImpact.infectionsByRequestedTime = getCases(severeImpact.currentlyInfected, result);
+  severeImpact.severeCasesByRequestedTime = getCases(severeImpact.severeCasesByRequestedTime, 0.15);
+  severeImpact.hospitalBedsByRequestedTime = getCases(totalHospitalBeds, 0.35);
 
   return { data, impact, severeImpact };
 };
