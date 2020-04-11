@@ -82,7 +82,7 @@ const covid19ImpactEstimator = data => {
   severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
     severeCasesForVentilators
   );
-  severeImpact.dollarsInFlight = severeMoneyLoss;
+  severeImpact.dollarsInFlight = Math.trunc(severeMoneyLoss);
 
   return { data, impact, severeImpact };
 };

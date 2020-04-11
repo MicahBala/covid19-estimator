@@ -1,14 +1,15 @@
 const express = require('express');
+
 const router = express.Router();
 const estimator = require('../estimator');
 
 router.post('/', (req, res) => {
   const inputData = {
     region: {
-      name: req.body.name,
-      avgAge: req.body.avgAge,
-      avgDailyIncomeInUSD: req.body.avgDailyIncomeInUSD,
-      avgDailyIncomePopulation: req.body.avgDailyIncomePopulation
+      name: req.body.region.name,
+      avgAge: req.body.region.avgAge,
+      avgDailyIncomeInUSD: req.body.region.avgDailyIncomeInUSD,
+      avgDailyIncomePopulation: req.body.region.avgDailyIncomePopulation
     },
     periodType: req.body.periodType,
     timeToElapse: req.body.timeToElapse,
@@ -17,10 +18,12 @@ router.post('/', (req, res) => {
     totalHospitalBeds: req.body.totalHospitalBeds
   };
 
-  let result = estimator(inputData);
+  const { data, impact, severeImpact } = estimator(inputData);
 
   res.status(200).json({
-    result
+    data,
+    impact,
+    severeImpact
   });
 });
 
