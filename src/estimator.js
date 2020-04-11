@@ -19,10 +19,10 @@ const covid19ImpactEstimator = (data) => {
     reportedCases,
     timeToElapse,
     periodType,
-    totalHospitalBeds,
-    avgDailyIncomeInUSD,
-    avgDailyIncomePopulation
+    totalHospitalBeds
   } = data;
+
+  const { avgDailyIncomeInUSD, avgDailyIncomePopulation } = data.region;
 
   // Get factor
   let estimate;
@@ -79,9 +79,9 @@ const covid19ImpactEstimator = (data) => {
 
   impact.severeCasesByRequestedTime = severeCases;
   impact.hospitalBedsByRequestedTime = hospitalBeds;
-  impact.casesForICUByRequestedTime = casesForICU;
-  impact.casesForVentilatorsByRequestedTime = casesForVentilators;
-  impact.dollarsInFlight = moneyLoss;
+  impact.casesForICUByRequestedTime = Math.trunc(casesForICU);
+  impact.casesForVentilatorsByRequestedTime = Math.trunc(casesForVentilators);
+  impact.dollarsInFlight = Math.trunc(moneyLoss);
 
   severeImpact.currentlyInfected = getCases(reportedCases, 50);
   severeImpact.infectionsByRequestedTime = getCases(
@@ -115,9 +115,9 @@ const covid19ImpactEstimator = (data) => {
 
   severeImpact.severeCasesByRequestedTime = severeImpactCases;
   severeImpact.hospitalBedsByRequestedTime = severeImpactHospitalBeds;
-  severeImpact.casesForICUByRequestedTime = severeCasesForICU;
-  severeImpact.casesForVentilatorsByRequestedTime = severeCasesForVentilators;
-  severeImpact.dollarsInFlight = severeMoneyLoss;
+  severeImpact.casesForICUByRequestedTime = Math.trunc(severeCasesForICU);
+  severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(severeCasesForVentilators);
+  severeImpact.dollarsInFlight = Math.trunc(severeMoneyLoss);
 
   return { data, impact, severeImpact };
 };
