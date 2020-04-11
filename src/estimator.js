@@ -69,9 +69,7 @@ const covid19ImpactEstimator = (data) => {
   const casesForVentilators = getCases(impact.infectionsByRequestedTime, 0.02);
 
 
-  const populationIncome = Math.trunc(
-    avgDailyIncomePopulation * avgDailyIncomeInUSD
-  );
+  const populationIncome = avgDailyIncomePopulation * avgDailyIncomeInUSD;
   const moneyLoss = (impact.infectionsByRequestedTime * populationIncome) / estimate;
 
   let hospitalBeds = getCases(totalHospitalBeds, 0.35);
