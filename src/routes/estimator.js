@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
   };
 
   const { data, impact, severeImpact } = estimator(inputData);
-
+  
   res.status(200).json({
     data,
     impact,
