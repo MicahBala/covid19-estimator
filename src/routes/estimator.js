@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const estimator = require('../estimator');
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   const inputData = {
     region: {
       name: req.body.region.name,
@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
   };
 
   const { data, impact, severeImpact } = estimator(inputData);
-  
+
   res.status(200).json({
     data,
     impact,
