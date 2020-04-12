@@ -3,7 +3,18 @@ const express = require('express');
 const router = express.Router();
 const estimator = require('../estimator');
 
-router.post('/', (req, res) => {
+const checkParameter = (res, parameter) => {
+  if (parameter === 'xml') {
+    res.setHeader('Content-Type', 'text/xml');
+  }
+  if (parameter === 'json') {
+    res.setHeader('Content-Type', 'application/json');
+  } else {
+    throw new Error('Check your url again');
+  }
+};
+
+const getEstimate = (req) => {
   const inputData = {
     region: {
       name: req.body.region.name,
@@ -18,7 +29,28 @@ router.post('/', (req, res) => {
     totalHospitalBeds: req.body.totalHospitalBeds
   };
 
-  const { data, impact, severeImpact } = estimator(inputData);
+  // const { data, impact, severeImpact } = estimator(inputData);
+  return estimator(inputData);
+};
+
+router.post('/', (req, res) => {
+  const result = getEstimate(req);
+  const { data, impact, severeImpact } = result;
+
+  res.status(200).json({
+    data,
+    impact,
+    severeImpact
+  });
+});
+
+router.post('/:optional', (req, res) => {
+  const urlParam = req.params.optional;
+
+  checkParameter(res, urlParam);
+
+  const result = getEstimate(req);
+  const { data, impact, severeImpact } = result;
 
   res.status(200).json({
     data,
