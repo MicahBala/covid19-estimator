@@ -4,17 +4,16 @@ const router = express.Router();
 const estimator = require('../estimator');
 
 const checkParameter = (res, parameter) => {
-  if (parameter === 'xml') {
-    res.setHeader('Content-Type', 'text/xml');
-  }
   if (parameter === 'json') {
-    res.setHeader('Content-Type', 'application/json');
+    return res.setHeader('Content-Type', 'application/json');
+  } else if (parameter === 'xml') {
+    return res.setHeader('Content-Type', 'text/xml');
   } else {
     throw new Error('Check your url again');
   }
 };
 
-const getEstimate = (req) => {
+const getEstimate = req => {
   const inputData = {
     region: {
       name: req.body.region.name,
