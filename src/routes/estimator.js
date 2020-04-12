@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const estimator = require('../estimator');
 
-router.post('/', (req, res, next) => {
+router.post('/', (req, res) => {
   const inputData = {
     region: {
       name: req.body.region.name,

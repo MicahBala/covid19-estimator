@@ -1,6 +1,8 @@
 // Covid-19 Estimator
-const covid19ImpactEstimator = data => {
-  const { reportedCases, timeToElapse, periodType, totalHospitalBeds } = data;
+const covid19ImpactEstimator = (data) => {
+  const {
+    reportedCases, timeToElapse, periodType, totalHospitalBeds
+  } = data;
 
   const { avgDailyIncomeInUSD, avgDailyIncomePopulation } = data.region;
 
@@ -33,8 +35,7 @@ const covid19ImpactEstimator = data => {
   const casesForVentilators = getCases(impact.infectionsByRequestedTime, 0.02);
 
   const populationIncome = avgDailyIncomePopulation * avgDailyIncomeInUSD;
-  const moneyLoss =
-    (impact.infectionsByRequestedTime * populationIncome) / estimate;
+  const moneyLoss = (impact.infectionsByRequestedTime * populationIncome) / estimate;
 
   let hospitalBeds = getCases(totalHospitalBeds, 0.35);
   hospitalBeds = Math.trunc(hospitalBeds - severeCases);
@@ -68,8 +69,7 @@ const covid19ImpactEstimator = data => {
   );
 
   const severePopIncome = avgDailyIncomePopulation * avgDailyIncomeInUSD;
-  const severeMoneyLoss =
-    (severeImpact.infectionsByRequestedTime * severePopIncome) / estimate;
+  const severeMoneyLoss = (severeImpact.infectionsByRequestedTime * severePopIncome) / estimate;
 
   let severeImpactHospitalBeds = getCases(totalHospitalBeds, 0.35);
   severeImpactHospitalBeds = Math.trunc(
