@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 
 const router = express.Router();
 const estimator = require('../estimator');
@@ -10,6 +11,7 @@ const checkParameter = (res, parameter) => {
   if (parameter === 'xml') {
     return res.setHeader('Content-Type', 'application/xml');
   }
+
   throw new Error('Check your url again');
 };
 
@@ -54,6 +56,18 @@ router.post('/:optional', (req, res) => {
     data,
     impact,
     severeImpact
+  });
+});
+
+router.get('/logs', (req, res) => {
+  res.setHeader('Content-Type', 'text/plain');
+
+  fs.readFile('./logs.txt', (err, data) => {
+    if (err) {
+      res.send(err);
+      return;
+    }
+    res.status(200).send(data);
   });
 });
 

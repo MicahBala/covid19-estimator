@@ -1,4 +1,6 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 
@@ -7,7 +9,15 @@ const bodyParser = require('body-parser');
 
 const estimatorRoutes = require('./src/routes/estimator');
 
+app.use(
+  morgan(':method :url    :status  :response-time ms', {
+    stream: fs.createWriteStream(path.join(__dirname, 'logs.txt'), {
+      flags: 'a'
+    })
+  })
+);
 app.use(morgan('tiny'));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
