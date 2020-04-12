@@ -8,12 +8,12 @@ const checkParameter = (res, parameter) => {
     return res.setHeader('Content-Type', 'application/json');
   }
   if (parameter === 'xml') {
-    return res.setHeader('Content-Type', 'text/xml');
+    return res.setHeader('Content-Type', 'application/xml');
   }
   throw new Error('Check your url again');
 };
 
-const getEstimate = (req) => {
+const getEstimate = req => {
   const inputData = {
     region: {
       name: req.body.region.name,
