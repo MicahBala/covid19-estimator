@@ -6,14 +6,14 @@ const estimator = require('../estimator');
 const checkParameter = (res, parameter) => {
   if (parameter === 'json') {
     return res.setHeader('Content-Type', 'application/json');
-  } else if (parameter === 'xml') {
-    return res.setHeader('Content-Type', 'text/xml');
-  } else {
-    throw new Error('Check your url again');
   }
+  if (parameter === 'xml') {
+    return res.setHeader('Content-Type', 'text/xml');
+  }
+  throw new Error('Check your url again');
 };
 
-const getEstimate = req => {
+const getEstimate = (req) => {
   const inputData = {
     region: {
       name: req.body.region.name,
