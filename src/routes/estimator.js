@@ -13,7 +13,7 @@ const checkParameter = (res, parameter) => {
   throw new Error('Check your url again');
 };
 
-const getEstimate = req => {
+const getEstimate = (req) => {
   const inputData = {
     region: {
       name: req.body.region.name,
@@ -28,7 +28,6 @@ const getEstimate = req => {
     totalHospitalBeds: req.body.totalHospitalBeds
   };
 
-  // const { data, impact, severeImpact } = estimator(inputData);
   return estimator(inputData);
 };
 
