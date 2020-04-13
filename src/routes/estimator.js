@@ -60,7 +60,7 @@ router.post('/:optional', (req, res) => {
 });
 
 router.get('/logs', (req, res) => {
-  res.setHeader('Content-Type', 'application/text');
+  res.setHeader('Content-Type', 'text/plain');
 
   fs.readFile('./logs.txt', (err, data) => {
     if (err) {

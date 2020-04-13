@@ -10,12 +10,32 @@ const bodyParser = require('body-parser');
 const estimatorRoutes = require('./src/routes/estimator');
 
 app.use(
-  morgan(':method :url    :status  :response-time ms', {
-    stream: fs.createWriteStream(path.join(__dirname, 'logs.txt'), {
-      flags: 'a'
-    })
-  })
+  morgan(
+    (tokens, req, res) => {
+      let responseTime = parseInt(
+        tokens['response-time'](req, res),
+        10
+      ).toString();
+
+      if (responseTime.length === 1) responseTime = `0${responseTime}`;
+
+      const logStr = [
+        tokens.method(req, res),
+        tokens.url(req, res),
+        tokens.status(req, res),
+        responseTime
+      ].join('\t\t');
+
+      return `${logStr}ms`;
+    },
+    {
+      stream: fs.createWriteStream(path.join(__dirname, 'logs.txt'), {
+        flags: 'a'
+      })
+    }
+  )
 );
+
 app.use(morgan('tiny'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
